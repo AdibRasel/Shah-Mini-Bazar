@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minibazar/BottomNavBarView/bottom_view.dart';
 import 'package:minibazar/GlobalWidgets/custom_button.dart';
 import 'package:minibazar/GlobalWidgets/custom_widget.dart';
 import 'package:minibazar/Helper/form_helper.dart';
@@ -72,7 +73,7 @@ class LoginScreen extends StatelessWidget {
                     height: 15,
                   ),
                   CustomButtom(buttonTitle: "Login", onTap: (){
-                    print("clicked");
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => const BottomBarScreen(),),);
                   }),
                   const SizedBox(
                     height: 15,

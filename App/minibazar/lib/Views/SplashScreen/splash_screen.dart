@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:minibazar/BottomNavBarView/bottom_view.dart';
 import 'package:minibazar/Utils/color.dart';
 import 'package:minibazar/Utils/config.dart';
-import 'package:minibazar/Views/WelcomeScreen/welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 5), () {
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (_) => const WelcomeScreen()),
+          MaterialPageRoute(builder: (_) => const BottomBarScreen()),
           (route) => false);
     });
   }
