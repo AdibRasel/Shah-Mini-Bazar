@@ -40,7 +40,73 @@ class _HomeScreenState extends State<HomeScreen> {
       'icon': 'assets/images/4.png'
     },
     {
-      'con': 'assets/images/5.png'
+      'icon': 'assets/images/5.png'
+    },
+    {
+      'icon': 'assets/images/1.png'
+    },
+    {
+      'icon': 'assets/images/2.png'
+    },
+  ];
+
+  List<Map<String, String>> categoriesList =[
+    {
+      'CategoriesName': 'মুদি বাজার'
+    },
+    {
+      'CategoriesName': 'ক্রোকাইরিজ সামগ্রী'
+    },
+    {
+      'CategoriesName': 'কসমেটিক্স সামগ্রী'
+    },
+    {
+      'CategoriesName': 'কনফেকসনারী সামগ্রী'
+    },
+    {
+    'CategoriesName': 'স্টেশনারী সামগ্রী'
+    },
+    {
+      'CategoriesName': 'গিফট সামগ্রী'
+    },
+    {
+      'CategoriesName': 'খেলনা সামগ্রী'
+    },
+    {
+      'CategoriesName': 'অন্যান্য'
+    },
+  ];
+
+
+  List<Map<String, String>> products =[
+    {
+      'image' : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW5wZ5Eql9CC3r-1JRrWo_TwrV9OyBJpxyCzNpvysCaVOXO9WteGPXvM9qyzH7TOoinpI&usqp=CAU',
+      'name' : 'চাউল',
+    },
+    {
+      'image' : 'https://d2u0ktu8omkpf6.cloudfront.net/1943bf2a941f84004bcfd791c885e723239006c33243c59e.jpg',
+      'name' : 'ডাল',
+      'price' : '১২০',
+    },
+    {
+      'image' : 'https://i.ytimg.com/vi/4aSqgLflgnM/maxresdefault.jpg',
+      'name' : 'ক্রোকাইরিজ',
+      'price' : '৪২০০',
+    },
+    {
+      'image' : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSYI36_21KMhp4L2dQ_1q6P2YBsSExLvcmrw&s',
+      'name' : 'গিপ্ট',
+      'price' : '১২৫০',
+    },
+    {
+      'image' : 'https://priyocareer.com/wp-content/uploads/2021/04/%E0%A6%96%E0%A7%87%E0%A6%B2%E0%A6%A8%E0%A6%BE-%E0%A6%AE%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%95%E0%A7%87%E0%A6%9F.jpg',
+      'name' : 'খেলনা',
+      'price' : '১৮৫০',
+    },
+    {
+      'image' : 'https://sharebiz.net/wp-content/uploads/2019/09/Business-Idea-Stationery-items.jpg',
+      'name' : 'স্টেশনারি',
+      'price' : '১৪৬০',
     },
   ];
 
@@ -57,32 +123,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
       body: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: 15.0,
-          vertical: 10,
+          horizontal: 15,
+          vertical: 0,
         ),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //================= Greting Section
-              const Text("Hello, User 👋",
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 18,
-              ),),
-              Text("Let's start shopping!",
-              style: TextStyle(
-                color: Colors.black.withOpacity(.5)
-              )),
+              //================= Greeting And Offer Section
               Container(
                 height: 150,
                 margin: const EdgeInsets.only(
-                  top: 20,
                   bottom:15
                 ),
                 width: double.infinity,
                 child: CarouselSlider.builder(
-                    itemCount: 3,
+                    itemCount: SliderImages.length,
                     itemBuilder: (context, index, realIndex){
                       return Container(
                         decoration: BoxDecoration(
@@ -100,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                 ),
               ),
-          
+
               //================= Categories
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -122,13 +178,14 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 5,
               ),
+              // Categories Image View
               SizedBox(
                 height: 62,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   primary: false,
-                  itemCount: 5,
+                  itemCount: 7,
                   itemBuilder: (context, index){
                     return Container(
                       margin: const EdgeInsets.only(right: 10),
@@ -141,15 +198,44 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                       ),
                       child: Center(
-                        child: Image.asset(categories[index]["icon"]!),
+                        child: Image.asset(categories[index]["icon"] ?? "Default",),
                       )
                     );
                   }
                 ),
               ),
-          
-          
-              //================= Recent Product
+              const SizedBox(
+                height: 5,
+              ),
+              // Categories Title View
+              SizedBox(
+            height: 100, // পর্যাপ্ত height দাও যাতে দুই লাইনে আসতে পারে
+            child: Wrap(
+              spacing: 2, // পাশে 2px গ্যাপ
+              runSpacing: 2, // উপরে নিচে 2px গ্যাপ
+              children: List.generate(
+                categoriesList.length,
+                    (index) => Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: AppColors.PrimaryColor,
+                    border: Border.all(color: const Color(0xFFD8D3D3)),
+                  ),
+                  child: Text(
+                    categoriesList[index]["CategoriesName"] ?? "Default",
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+
+
+
+
+          //================= Recent Product
               const SizedBox(
                 height: 15,
               ),
@@ -163,108 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
 
-
-
-              // Chatgpt
-              // const Padding(
-              //   padding: EdgeInsets.all(20.0),
-              //   child: SizedBox(
-              //     height: 15,
-              //     child: Text("Chatgpt", style: TextStyle(fontSize: 30),),
-              //   ),
-              // ),
-              // GridView.builder(
-              //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              //     crossAxisCount: 2, // মোবাইলে 2 কলাম, বড় স্ক্রিনে Responsive
-              //     crossAxisSpacing: 10,
-              //     mainAxisSpacing: 15,
-              //     childAspectRatio: 0.7, // সুন্দর ব্যালান্স
-              //   ),
-              //   itemCount: 6,
-              //   shrinkWrap: true,
-              //   primary: false,
-              //   itemBuilder: (context, index) {
-              //     return Container(
-              //       decoration: BoxDecoration(
-              //         color: Colors.white,
-              //         borderRadius: BorderRadius.circular(15),
-              //         boxShadow: [
-              //           BoxShadow(
-              //             color: Colors.black.withOpacity(0.1),
-              //             blurRadius: 5,
-              //             spreadRadius: 2,
-              //             offset: const Offset(0, 3),
-              //           ),
-              //         ],
-              //       ),
-              //       child: Column(
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         children: [
-              //           Stack(
-              //             children: [
-              //               ClipRRect(
-              //                 borderRadius: const BorderRadius.only(
-              //                   topLeft: Radius.circular(15),
-              //                   topRight: Radius.circular(15),
-              //                 ),
-              //                 child: Image.network(
-              //                   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW5wZ5Eql9CC3r-1JRrWo_TwrV9OyBJpxyCzNpvysCaVOXO9WteGPXvM9qyzH7TOoinpI&usqp=CAU",
-              //                   height: 150,
-              //                   width: double.infinity,
-              //                   fit: BoxFit.cover,
-              //                 ),
-              //               ),
-              //               Positioned(
-              //                 top: 8,
-              //                 right: 8,
-              //                 child: Container(
-              //                   decoration: BoxDecoration(
-              //                     color: Colors.white.withOpacity(0.8),
-              //                     shape: BoxShape.circle,
-              //                   ),
-              //                   child: IconButton(
-              //                     onPressed: () {},
-              //                     icon: const Icon(Icons.favorite_border, color: Colors.red),
-              //                   ),
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //           const Padding(
-              //             padding: EdgeInsets.all(8.0),
-              //             child: Column(
-              //               crossAxisAlignment: CrossAxisAlignment.start,
-              //               children: [
-              //                 Text(
-              //                   "Miniket Rice",
-              //                   style: TextStyle(
-              //                     fontWeight: FontWeight.bold,
-              //                     fontSize: 16,
-              //                   ),
-              //                 ),
-              //                 SizedBox(height: 5),
-              //                 Text(
-              //                   "2520/-",
-              //                   style: TextStyle(
-              //                     fontWeight: FontWeight.bold,
-              //                     fontSize: 18,
-              //                     color: Colors.green, // প্রাইসকে আলাদা দেখানোর জন্য
-              //                   ),
-              //                 ),
-              //               ],
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     );
-              //   },
-              // ),
-
-
-              // DeepSeek
-
-
-              // Deepseek
+              // Product List লম্বা লম্বী
               GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 1, // এক সারিতে ১টি আইটেম
@@ -272,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisSpacing: 10,
                   childAspectRatio: 1.9, // লেআউট চওড়া করার জন্য অ্যাডজাস্ট
                 ),
-                itemCount: 10,
+                itemCount: products.length,
                 shrinkWrap: true,
                 primary: false,
                 itemBuilder: (context, index) {
@@ -295,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(15),
                                   child: Image.network(
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW5wZ5Eql9CC3r-1JRrWo_TwrV9OyBJpxyCzNpvysCaVOXO9WteGPXvM9qyzH7TOoinpI&usqp=CAU",
+                                    products[index]['image'] ?? "assets/images/shoppingCar.gif",
                                     height: 100,
                                     width: 100,
                                     fit: BoxFit.cover,
@@ -310,16 +295,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       // নাম
-                                      const Text(
-                                        "Miniket Rice",
-                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                      Text(
+                                        products[index]['name'] ?? "Default",
+                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                                       ),
                                       const SizedBox(height: 5),
 
                                       // দাম
-                                      const Text(
-                                        "2520/-",
-                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.green),
+                                      Text(
+                                        products[index]['price'] ?? "Default",
+                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.green),
                                       ),
 
 
@@ -339,7 +324,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             items: ["কেজি", "বস্তা"].map<DropdownMenuItem<String>>((String value) {
                                               return DropdownMenuItem<String>(
                                                 value: value,
-                                                child: Text(value, style: TextStyle(fontSize: 14)),
+                                                child: Text(value, style: const TextStyle(fontSize: 14)),
                                               );
                                             }).toList(),
                                           ),
@@ -378,10 +363,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
 
 
-
-
-
-
                                     ],
                                   ),
                                 ),
@@ -397,7 +378,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: ElevatedButton(
                               onPressed: () {},
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blue,
+                                backgroundColor: AppColors.PrimaryColor,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                                 padding: const EdgeInsets.symmetric(vertical: 12),
                               ),
@@ -413,25 +394,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
               ),
-
-
-
-
-
-
-
-              const Padding(
-                padding: EdgeInsets.all(20.0),
-                child: SizedBox(
-                  height: 15,
-                  child: Text("Class", style: TextStyle(fontSize: 30),),
-                ),
+              const SizedBox(
+                height: 15,
               ),
-
-
-
-
-
+              // Product List আডাআড়ি
               GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -439,7 +405,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisSpacing: 15,
                     childAspectRatio: .8
                 ),
-                itemCount: 6,
+                itemCount: products.length,
                 shrinkWrap: true,
                 primary: false,
                 itemBuilder: (context, index){
@@ -456,9 +422,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            image: const DecorationImage(
+                            image: DecorationImage(
                               image: NetworkImage(
-                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW5wZ5Eql9CC3r-1JRrWo_TwrV9OyBJpxyCzNpvysCaVOXO9WteGPXvM9qyzH7TOoinpI&usqp=CAU",
+                                products[index]['image'] ?? "assets/images/shoppingCar.gif",
                               ),
                               fit: BoxFit.cover,
                             ),
@@ -476,21 +442,21 @@ class _HomeScreenState extends State<HomeScreen> {
                             ]
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Miniket Cal",
-                              style: TextStyle(
+                              Text( products[index]['name'] ?? "Default",
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 15
                               )),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
-                              Text("2520/- ",
-                              style: TextStyle(
+                              Text( products[index]['price'] ?? "Default",
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18
                               ),)
@@ -501,12 +467,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 },
-          
+
               ),
-          
-              
-          
-          
+
+
+
+
+
+
+
             ],
           ),
         ),
