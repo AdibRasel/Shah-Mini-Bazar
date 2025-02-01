@@ -4,6 +4,7 @@ import 'package:minibazar/GlobalWidgets/custom_widget.dart';
 import 'package:minibazar/Utils/color.dart';
 import 'package:minibazar/Views/Authentication/LoginScreen/login_screen.dart';
 import 'package:minibazar/Views/Authentication/RegisterScreen/register_screen.dart';
+import 'package:minibazar/Views/ProductDetails/product_details.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -279,11 +280,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 // প্রোডাক্ট ইমেজ (বাম পাশে)
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(15),
-                                  child: Image.network(
-                                    products[index]['image'] ?? "assets/images/shoppingCar.gif",
-                                    height: 100,
-                                    width: 100,
-                                    fit: BoxFit.cover,
+                                  child: InkWell(
+                                    onTap:(){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=> ProductDetailsScreen(product: products[index],),),);
+                                    },
+                                    child: Image.network(
+                                      products[index]['image'] ?? "assets/images/shoppingCar.gif",
+                                      height: 100,
+                                      width: 100,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(width: 10),
@@ -295,9 +301,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       // নাম
-                                      Text(
-                                        products[index]['name'] ?? "Default",
-                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                      InkWell(
+                                        onTap:(){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=> ProductDetailsScreen(product: products[index],),),);
+                                        },
+                                        child: Text(
+                                          products[index]['name'] ?? "Default",
+                                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                        ),
                                       ),
                                       const SizedBox(height: 5),
 
@@ -394,6 +405,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
               ),
+
+
               const SizedBox(
                 height: 15,
               ),
@@ -409,61 +422,66 @@ class _HomeScreenState extends State<HomeScreen> {
                 shrinkWrap: true,
                 primary: false,
                 itemBuilder: (context, index){
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF2F2F2),
-                      borderRadius: BorderRadius.circular(15)
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:[
-                        Container(
-                          height: 120,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                products[index]['image'] ?? "assets/images/shoppingCar.gif",
+                  return InkWell(
+                    onTap:(){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> ProductDetailsScreen(product: products[index],),),);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF2F2F2),
+                        borderRadius: BorderRadius.circular(15)
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children:[
+                          Container(
+                            height: 120,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  products[index]['image'] ?? "assets/images/shoppingCar.gif",
+                                ),
+                                fit: BoxFit.cover,
                               ),
-                              fit: BoxFit.cover,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children:[
+                                IconButton(
+                                  onPressed: (){},
+                                  icon: Icon(
+                                      Icons.favorite_border,
+                                    color: Colors.black.withOpacity(0.5),
+                                  ),
+                                ),
+                              ]
                             ),
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children:[
-                              IconButton(
-                                onPressed: (){},
-                                icon: Icon(
-                                    Icons.favorite_border,
-                                  color: Colors.black.withOpacity(0.5),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text( products[index]['name'] ?? "Default",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15
+                                )),
+                                const SizedBox(
+                                  height: 5,
                                 ),
-                              ),
-                            ]
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text( products[index]['name'] ?? "Default",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 15
-                              )),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Text( products[index]['price'] ?? "Default",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18
-                              ),)
-                            ],
-                          ),
-                        )
-                      ],
+                                Text( products[index]['price'] ?? "Default",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18
+                                ),)
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   );
                 },

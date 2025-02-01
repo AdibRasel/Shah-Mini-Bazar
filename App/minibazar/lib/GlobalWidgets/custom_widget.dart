@@ -6,8 +6,11 @@ PreferredSizeWidget customAppBar({
   List<Widget> ? action,
   Widget? isLeading,
   required BuildContext context,
+  Color? backgroundColor,
   }){
     return AppBar(
+      backgroundColor: backgroundColor,
+      elevation: 0,
       centerTitle: true,
       automaticallyImplyLeading: false,
       leading: isLeading ?? IconButton(
