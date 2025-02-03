@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:minibazar/GlobalWidgets/custom_widget.dart';
 import 'package:minibazar/Utils/color.dart';
+import 'package:minibazar/Views/CartScreen/cart_screen.dart';
+import 'package:minibazar/Views/FavoriteScreen/favorite_screen.dart';
 import 'package:minibazar/Views/HomeScreen/home_screen.dart';
 
 class BottomBarScreen extends StatefulWidget {
@@ -16,8 +18,8 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
 
   List<Widget> screen = [
     const HomeScreen(),
-    const Center(child: Text("Fav Screen")),
-    const Center(child: Text("Cart Screen")),
+    const FavoriteScreen(),
+    const CartScreen(),
     const Center(child: Text("Profile Screen")),
   ];
 

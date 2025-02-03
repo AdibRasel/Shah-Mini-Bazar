@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:minibazar/Utils/color.dart';
 import 'package:minibazar/Utils/config.dart';
-import 'package:minibazar/Views/Authentication/LoginScreen/login_screen.dart';
+import 'package:minibazar/Views/WelcomeScreen/welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,10 +17,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 3), () {
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (_) => const LoginScreen()),
+          MaterialPageRoute(builder: (_) => const WelcomeScreen()),
           (route) => false);
     });
   }
