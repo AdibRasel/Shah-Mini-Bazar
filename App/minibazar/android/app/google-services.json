@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1078927038707",
+    "project_id": "shahaminibazar",
+    "storage_bucket": "shahaminibazar.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078927038707:android:8db7bc5952514068f07f86",
+        "android_client_info": {
+          "package_name": "com.shahaminibazar.ecommerce"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWocET_5R8mf16wvLKA_NCaTGqTjMfP6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
